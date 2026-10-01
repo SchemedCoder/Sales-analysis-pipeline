@@ -1,18 +1,1 @@
-import pandas as pd
-import sqlite3
 
-def run_etl():
-    print("Starting ETL pipeline...")
-
-    df = pd.read_csv('data/sales_data.csv')
-
-    df.dropna(inplace=True)
-    df['revenue'] = df['quantity'] * df['price']
-
-    conn = sqlite3.connect('sales.db')
-    df.to_sql('sales', conn, if_exists='replace', index=False)
-
-    print("ETL completed!")
-
-if __name__ == "__main__":
-    run_etl()
